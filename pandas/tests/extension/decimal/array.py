@@ -125,7 +125,9 @@ class DecimalArray(ExtensionArray, ExtensionScalarOpsMixin):
 
     def astype(self, dtype, copy=True):
         if isinstance(dtype, type(self.dtype)):
-            return type(self)(self._data, context=dtype.context)
+            if copy:
+                return type(self)(self._data, context=dtype.context)
+            return self
         return np.asarray(self, dtype=dtype)
 
     def __setitem__(self, key, value):

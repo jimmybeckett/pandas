@@ -1,6 +1,8 @@
-import pandas as pd
-from pandas.core.internals import ObjectBlock
+import pytest
 
+import pandas as pd
+from pandas.core.arrays import PandasArray
+from pandas.core.internals import ObjectBlock
 from .base import BaseExtensionTests
 
 
@@ -21,3 +23,10 @@ class BaseCastingTests(BaseExtensionTests):
         result = pd.Series(data[:5]).astype(str)
         expected = pd.Series(data[:5].astype(str))
         self.assert_series_equal(result, expected)
+
+    @pytest.mark.parametrize('copy', [True, False])
+    def test_astype_own_type(self, data, copy):
+        print(type(data))
+        result = data.astype(data.dtype, copy=copy)
+        assert (result is data) is (not copy)
+        self.assert_extension_array_equal(result, data)

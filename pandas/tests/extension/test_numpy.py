@@ -137,6 +137,11 @@ class TestCasting(BaseNumPyTests, base.BaseCastingTests):
         # ValueError: setting an array element with a sequence
         super().test_astype_str(data)
 
+    @pytest.mark.parametrize('copy', [True, False])
+    def test_astype_own_type(self, data, copy):
+        result = pd.array(data.astype(data.dtype.numpy_dtype, copy=copy))
+        self.assert_extension_array_equal(pd.array(result), data)
+
 
 class TestConstructors(BaseNumPyTests, base.BaseConstructorsTests):
     @pytest.mark.skip(reason="We don't register our dtype")

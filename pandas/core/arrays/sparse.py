@@ -1398,6 +1398,9 @@ class SparseArray(PandasObject, ExtensionArray, ExtensionOpsMixin):
         IntIndex
         Indices: array([2, 3], dtype=int32)
         """
+        if isinstance(dtype, type(self.dtype)) and not copy:
+            return self
+
         dtype = self.dtype.update_dtype(dtype)
         subtype = dtype._subtype_with_str
         sp_values = astype_nansafe(self.sp_values, subtype, copy=copy)

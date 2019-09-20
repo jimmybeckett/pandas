@@ -513,6 +513,8 @@ class IntegerArray(ExtensionArray, ExtensionOpsMixin):
             if incompatible type with an IntegerDtype, equivalent of same_kind
             casting
         """
+        if isinstance(dtype, type(self.dtype)) and not copy:
+            return self
 
         # if we are astyping to an existing IntegerDtype we can fastpath
         if isinstance(dtype, _IntegerDtype):

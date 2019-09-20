@@ -616,6 +616,9 @@ class PeriodArray(dtl.DatetimeLikeArrayMixin, dtl.DatelikeOps):
     def astype(self, dtype, copy=True):
         # We handle Period[T] -> Period[U]
         # Our parent handles everything else.
+        if isinstance(dtype, type(self.dtype)) and not copy:
+            return self
+
         dtype = pandas_dtype(dtype)
 
         if is_period_dtype(dtype):
