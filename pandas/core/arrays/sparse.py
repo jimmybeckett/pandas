@@ -1348,6 +1348,8 @@ class SparseArray(PandasObject, ExtensionArray, ExtensionOpsMixin):
         The output will always be a SparseArray. To convert to a dense
         ndarray with a certain dtype, use :meth:`numpy.asarray`.
 
+        If dtype is self.dtype and copy is false returns self.
+
         Parameters
         ----------
         dtype : np.dtype or ExtensionDtype

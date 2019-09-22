@@ -124,6 +124,7 @@ class DecimalArray(ExtensionArray, ExtensionScalarOpsMixin):
         return type(self)(self._data.copy())
 
     def astype(self, dtype, copy=True):
+        # If dtype is self.dtype and copy is false returns self.
         if isinstance(dtype, type(self.dtype)):
             if copy:
                 return type(self)(self._data, context=dtype.context)

@@ -130,7 +130,6 @@ skip_nested = pytest.mark.usefixtures("skip_numpy_object")
 class BaseNumPyTests:
     pass
 
-
 class TestCasting(BaseNumPyTests, base.BaseCastingTests):
     @skip_nested
     def test_astype_str(self, data):

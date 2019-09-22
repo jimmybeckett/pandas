@@ -506,6 +506,7 @@ class IntegerArray(ExtensionArray, ExtensionOpsMixin):
         -------
         array : ndarray or IntegerArray
             NumPy ndarray or IntergerArray with 'dtype' for its dtype.
+            If dtype is self.dtype and copy is false returns self.
 
         Raises
         ------
